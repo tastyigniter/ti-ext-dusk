@@ -1,0 +1,12 @@
+{
+  "name": "igniter/dusk",
+  "type": "tastyigniter-extension",
+  "require": {
+    "laravel/dusk": "^5.8"
+  },
+  "config": {
+    "preferred-install": "dist"
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true
+}

@@ -1,0 +1,12 @@
+{
+  "code": "igniter.dusk",
+  "name": "Dusk",
+  "author": "SamPoyigi",
+  "description": "Laravel Dusk browser testing for TastyIgniter.",
+  "version": "1.0.0",
+  "icon": {
+    "class": "fa fa-vials",
+    "backgroundColor": "#405263",
+    "color": "#FFF"
+  }
+}
