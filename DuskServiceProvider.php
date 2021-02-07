@@ -36,9 +36,9 @@ class DuskServiceProvider extends ServiceProvider
             $this->commands([
                 Commands\DuskCommand::class,
                 Commands\DuskFailsCommand::class,
-//                Console\MakeCommand::class,
-//                Console\PageCommand::class,
-//                Console\ComponentCommand::class,
+                Commands\MakeCommand::class,
+                Commands\PageCommand::class,
+                Commands\ComponentCommand::class,
                 Dusk\Console\ChromeDriverCommand::class,
             ]);
         }
