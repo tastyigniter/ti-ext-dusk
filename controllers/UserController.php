@@ -2,7 +2,7 @@
 
 namespace Igniter\Dusk\Controllers;
 
-use ApplicationException;
+use Igniter\Flame\Exception\ApplicationException;
 
 class UserController
 {

@@ -2,7 +2,7 @@
 
 namespace Igniter\Dusk\Concerns;
 
-use Config;
+use Illuminate\Support\Facades\Config;
 
 trait CreatesApplication
 {
