@@ -45,7 +45,6 @@ class GeneralSettings extends AdminPage
             '@siteEmailField' => 'input[name="Setting[site_email]"]',
             '@siteUrlField' => 'input[name="Setting[site_url]"]',
             '@countryIdField' => 'input[name="Setting[country_id]"]',
-            '@siteLocationModeField' => 'input[name="Setting[site_location_mode]"]',
             '@siteLogoField' => 'input[name="Setting[site_logo]"]',
             '@mapsField' => 'input[name="Setting[maps]"]',
             '@distanceUnitField' => 'input[name="Setting[distance_unit]"]',

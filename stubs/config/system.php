@@ -2,6 +2,6 @@
 
 return [
     'extensionsPath' => '/extensions',
-    'linkPolicy' => env('LINK_POLICY', 'detect'),
+    'urlPolicy' => env('URL_POLICY', 'detect'),
     'enableCsrfProtection' => env('ENABLE_CSRF', TRUE),
 ];
