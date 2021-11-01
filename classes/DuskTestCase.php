@@ -91,7 +91,7 @@ abstract class DuskTestCase extends BaseTestCase
 
     public function tearDown(): void
     {
-        if ($this->usingTestDatabase AND isset($this->testDatabasePath)) {
+        if ($this->usingTestDatabase && isset($this->testDatabasePath)) {
             unlink($this->testDatabasePath);
         }
 
