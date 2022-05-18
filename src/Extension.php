@@ -1,6 +1,6 @@
 <?php namespace Igniter\Dusk;
 
-use System\Classes\BaseExtension;
+use Igniter\System\Classes\BaseExtension;
 
 /**
  * Dusk Extension Information File

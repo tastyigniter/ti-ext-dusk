@@ -2,10 +2,10 @@
 
 namespace Igniter\Dusk\Classes;
 
-use Admin\Models\Users_model;
 use Facebook\WebDriver\Chrome\ChromeOptions;
 use Facebook\WebDriver\Remote\DesiredCapabilities;
 use Facebook\WebDriver\Remote\RemoteWebDriver;
+use Igniter\Admin\Models\User;
 use Igniter\Dusk\Concerns\CreatesApplication;
 use Igniter\Dusk\Concerns\RunsMigrations;
 use Igniter\Dusk\Concerns\TestsExtensions;
@@ -101,11 +101,11 @@ abstract class DuskTestCase extends BaseTestCase
     /**
      * Return the default user to authenticate.
      *
-     * @return \Admin\Models\Users_model|int|null
+     * @return \Igniter\Admin\Models\User|int|null
      */
     protected function user()
     {
-        return Users_model::whereUsername(env('DUSK_ADMIN_USER', 'admin'))->first();
+        return User::whereUsername(env('DUSK_ADMIN_USER', 'admin'))->first();
     }
 
     /**
@@ -119,7 +119,7 @@ abstract class DuskTestCase extends BaseTestCase
             $classes = preg_split('/\s+/', $this->attribute($selector, 'class'), -1, PREG_SPLIT_NO_EMPTY);
 
             if (empty($classes)) {
-                return FALSE;
+                return false;
             }
 
             return in_array($class, $classes);
@@ -132,9 +132,9 @@ abstract class DuskTestCase extends BaseTestCase
         $consoleDir = Config::get('igniter.dusk::dusk.consolePath', storage_path('dusk/console'));
 
         if (!is_dir($screenshotDir))
-            mkdir($screenshotDir, 0777, TRUE);
+            mkdir($screenshotDir, 0777, true);
 
         if (!is_dir($consoleDir))
-            mkdir($consoleDir, 0777, TRUE);
+            mkdir($consoleDir, 0777, true);
     }
 }

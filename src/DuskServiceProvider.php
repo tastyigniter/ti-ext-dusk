@@ -8,7 +8,7 @@ use Laravel\Dusk;
 
 class DuskServiceProvider extends ServiceProvider
 {
-    protected $defer = FALSE;
+    protected $defer = false;
 
     public function boot()
     {

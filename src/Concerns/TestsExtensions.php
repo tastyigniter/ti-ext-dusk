@@ -3,8 +3,8 @@
 namespace Igniter\Dusk\Concerns;
 
 use Igniter\Flame\Exception\SystemException;
-use System\Classes\ExtensionManager;
-use System\Classes\UpdateManager;
+use Igniter\System\Classes\ExtensionManager;
+use Igniter\System\Classes\UpdateManager;
 
 trait TestsExtensions
 {
@@ -31,7 +31,7 @@ trait TestsExtensions
         $this->testCaseLoadedExtensions = [];
 
         if ($extensionCode = $this->guessExtensionCodeFromTest())
-            $this->runExtensionRefreshCommand($extensionCode, FALSE);
+            $this->runExtensionRefreshCommand($extensionCode, false);
     }
 
     /**
@@ -61,7 +61,7 @@ trait TestsExtensions
         $path = $reflect->getFilename();
         $basePath = $this->app->extensionsPath();
 
-        $result = FALSE;
+        $result = false;
 
         if (strpos($path, $basePath) === 0) {
             $result = ltrim(str_replace('\\', '/', substr($path, strlen($basePath))), '/');
@@ -78,7 +78,7 @@ trait TestsExtensions
      * @param bool $throwException
      * @return void
      */
-    protected function runExtensionRefreshCommand($code, $throwException = TRUE): void
+    protected function runExtensionRefreshCommand($code, $throwException = true): void
     {
         if (!preg_match('/^[\w+]*\.[\w+]*$/', $code)) {
             if (!$throwException)

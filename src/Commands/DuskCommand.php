@@ -3,12 +3,12 @@
 namespace Igniter\Dusk\Commands;
 
 use Igniter\Flame\Exception\ApplicationException;
+use Igniter\System\Classes\ExtensionManager;
 use Illuminate\Support\Facades\Config;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Process\Exception\ProcessSignaledException;
 use Symfony\Component\Process\Exception\RuntimeException;
 use Symfony\Component\Process\Process;
-use System\Classes\ExtensionManager;
 
 class DuskCommand extends \Laravel\Dusk\Console\DuskCommand
 {
@@ -172,7 +172,7 @@ class DuskCommand extends \Laravel\Dusk\Console\DuskCommand
     protected function writeConfigurationFiles()
     {
         if (!is_dir(base_path('config/dusk'))) {
-            mkdir(base_path('config/dusk'), 0755, TRUE);
+            mkdir(base_path('config/dusk'), 0755, true);
 
             foreach (glob(extension_path('igniter/dusk/stubs/config/*.php')) as $file) {
                 $path = pathinfo($file);
@@ -182,7 +182,7 @@ class DuskCommand extends \Laravel\Dusk\Console\DuskCommand
             return;
         }
 
-        $this->hasConfigurationFiles = TRUE;
+        $this->hasConfigurationFiles = true;
     }
 
     protected function writeConfiguration()
@@ -194,7 +194,7 @@ class DuskCommand extends \Laravel\Dusk\Console\DuskCommand
             return;
         }
 
-        $this->hasPhpUnitConfiguration = TRUE;
+        $this->hasPhpUnitConfiguration = true;
     }
 
     protected function buildPhpUnitXmlStub($file)

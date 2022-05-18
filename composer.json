@@ -12,6 +12,11 @@
   "require": {
     "laravel/dusk": "^6.15"
   },
+  "autoload": {
+    "psr-4": {
+      "Igniter\\Dusk\\": "src/"
+    }
+  },
   "extra": {
     "tastyigniter-extension": {
       "code": "igniter.dusk",

@@ -11,7 +11,7 @@ trait CreatesApplication
      *
      * @var boolean
      */
-    protected $usingTestDatabase = FALSE;
+    protected $usingTestDatabase = false;
 
     /**
      * The test SQLite database in use
