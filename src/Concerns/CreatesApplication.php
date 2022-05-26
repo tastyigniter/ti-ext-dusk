@@ -2,8 +2,6 @@
 
 namespace Igniter\Dusk\Concerns;
 
-use Illuminate\Support\Facades\Config;
-
 trait CreatesApplication
 {
     /**
@@ -35,8 +33,6 @@ trait CreatesApplication
         $app->setLocale('en');
 
         $app['config']->set('mail.driver', 'array');
-
-        $app->useExtensionsPath(realpath(base_path().Config::get('system.extensionsPath')));
 
         return $app;
     }
