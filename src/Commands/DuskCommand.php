@@ -71,7 +71,7 @@ class DuskCommand extends \Laravel\Dusk\Console\DuskCommand
 
     protected function listExtensions()
     {
-        $extensionManager = ExtensionManager::instance();
+        $extensionManager = resolve(ExtensionManager::class);
 
         if ($extensionCode = $this->argument('extension')) {
             if (!$extensionManager->hasExtension($extensionCode))

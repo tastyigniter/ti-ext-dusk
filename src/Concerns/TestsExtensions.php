@@ -87,7 +87,7 @@ trait TestsExtensions
             throw new SystemException(sprintf('Invalid extension code: "%s"', $code));
         }
 
-        $extensionManager = ExtensionManager::instance();
+        $extensionManager = resolve(ExtensionManager::class);
 
         if (!$extension = $extensionManager->findExtension($code)) {
             $namespace = '\\'.str_replace('.', '\\', strtolower($code));
