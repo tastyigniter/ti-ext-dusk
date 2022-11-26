@@ -1,6 +1,6 @@
 {
   "name": "tastyigniter/ti-ext-dusk",
-  "type": "tastyigniter-extension",
+  "type": "tastyigniter-package",
   "description": "Laravel Dusk browser testing for TastyIgniter.",
   "license": "MIT",
   "authors": [
