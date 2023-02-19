@@ -10,8 +10,7 @@
     }
   ],
   "require": {
-    "tastyigniter/flame": "v4.x-dev",
-    "laravel/dusk": "^6.15"
+    "laravel/dusk": "^7.5"
   },
   "autoload": {
     "psr-4": {
