@@ -23,28 +23,26 @@ trait TestsExtensions
     /**
      * Detects the current extension based on the namespace,
      * when running tests within a extension.
-     *
-     * @return void
      */
     public function detectExtension(): void
     {
         $this->testCaseLoadedExtensions = [];
 
-        if ($extensionCode = $this->guessExtensionCodeFromTest())
+        if ($extensionCode = $this->guessExtensionCodeFromTest()) {
             $this->runExtensionRefreshCommand($extensionCode, false);
+        }
     }
 
     /**
      * Detects the current extension dependencies based on the namespace,
      * when running tests within a extension.
-     *
-     * @param $extension
      */
     protected function detectExtensionDependencies($extension): void
     {
         foreach ((array)$extension->require as $dependency) {
-            if (isset($this->testCaseLoadedExtensions[$dependency]))
+            if (isset($this->testCaseLoadedExtensions[$dependency])) {
                 continue;
+            }
 
             $this->runExtensionRefreshCommand($dependency);
         }
@@ -74,15 +72,14 @@ trait TestsExtensions
     /**
      * Runs a refresh command on a extension.
      *
-     * @param $code
      * @param bool $throwException
-     * @return void
      */
     protected function runExtensionRefreshCommand($code, $throwException = true): void
     {
         if (!preg_match('/^[\w+]*\.[\w+]*$/', $code)) {
-            if (!$throwException)
+            if (!$throwException) {
                 return;
+            }
 
             throw new SystemException(sprintf('Invalid extension code: "%s"', $code));
         }
@@ -94,8 +91,9 @@ trait TestsExtensions
             $path = array_get($extensionManager->namespaces(), $namespace);
 
             if (!$path) {
-                if (!$throwException)
+                if (!$throwException) {
                     return;
+                }
 
                 throw new SystemException(sprintf('Unable to find extension with code: "%s"', $code));
             }

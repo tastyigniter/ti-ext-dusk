@@ -36,8 +36,9 @@ class UserController
     {
         $loggedIn = $this->getAuthManager($appContext)->loginUsingId($userId);
 
-        if (!$loggedIn)
+        if (!$loggedIn) {
             throw new ApplicationException('Invalid user ID');
+        }
     }
 
     /**
@@ -52,7 +53,6 @@ class UserController
     }
 
     /**
-     * @param $appContext
      * @return \Igniter\Flame\Auth\Manager
      */
     protected function getAuthManager($appContext)

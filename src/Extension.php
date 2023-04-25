@@ -1,4 +1,6 @@
-<?php namespace Igniter\Dusk;
+<?php
+
+namespace Igniter\Dusk;
 
 use Igniter\System\Classes\BaseExtension;
 

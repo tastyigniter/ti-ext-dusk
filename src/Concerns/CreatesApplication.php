@@ -7,7 +7,7 @@ trait CreatesApplication
     /**
      * Determines if a test SQLite database is being used
      *
-     * @var boolean
+     * @var bool
      */
     protected $usingTestDatabase = false;
 

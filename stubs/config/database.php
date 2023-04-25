@@ -42,5 +42,5 @@ return [
             'port' => env('REDIS_PORT', 6379),
         ],
     ],
-    'useConfigForTesting' => env('DB_USE_CONFIG_FOR_TESTING', FALSE),
+    'useConfigForTesting' => env('DB_USE_CONFIG_FOR_TESTING', false),
 ];

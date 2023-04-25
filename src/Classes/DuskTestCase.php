@@ -52,8 +52,6 @@ abstract class DuskTestCase extends BaseTestCase
 
     /**
      * Register the base URL with Dusk.
-     *
-     * @return void
      */
     public function setUp(): void
     {
@@ -61,8 +59,9 @@ abstract class DuskTestCase extends BaseTestCase
 
         parent::setUp();
 
-        if ($this->usingTestDatabase)
+        if ($this->usingTestDatabase) {
             $this->runIgniterUpCommand();
+        }
 
         $this->detectExtension();
 
@@ -131,10 +130,12 @@ abstract class DuskTestCase extends BaseTestCase
         $screenshotDir = Config::get('igniter.dusk::dusk.screenshotsPath', storage_path('dusk/screenshots'));
         $consoleDir = Config::get('igniter.dusk::dusk.consolePath', storage_path('dusk/console'));
 
-        if (!is_dir($screenshotDir))
+        if (!is_dir($screenshotDir)) {
             mkdir($screenshotDir, 0777, true);
+        }
 
-        if (!is_dir($consoleDir))
+        if (!is_dir($consoleDir)) {
             mkdir($consoleDir, 0777, true);
+        }
     }
 }

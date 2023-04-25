@@ -20,7 +20,6 @@ class SideNav extends BaseComponent
     /**
      * Assert that the browser page contains the component.
      *
-     * @param Browser $browser
      * @return void
      */
     public function assert(Browser $browser)
