@@ -1,31 +1,44 @@
 {
-  "name": "tastyigniter/ti-ext-dusk",
-  "type": "tastyigniter-package",
-  "description": "Laravel Dusk browser testing for TastyIgniter.",
-  "license": "MIT",
-  "authors": [
-    {
-      "name": "Sam Poyigi",
-      "email": "sam@sampoyigi.com"
+    "name": "tastyigniter/ti-ext-dusk",
+    "type": "tastyigniter-package",
+    "description": "Laravel Dusk browser testing for TastyIgniter.",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Sam Poyigi",
+            "email": "sam@sampoyigi.com"
+        }
+    ],
+    "require": {
+        "laravel/dusk": "^7.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "Igniter\\Dusk\\": "src/"
+        }
+    },
+    "extra": {
+        "tastyigniter-extension": {
+            "code": "igniter.dusk",
+            "name": "Dusk",
+            "icon": {
+                "class": "fa fa-vials",
+                "backgroundColor": "#405263",
+                "color": "#FFF"
+            }
+        }
+    },
+    "require-dev": {
+        "laravel/pint": "^1.2",
+        "nunomaduro/larastan": "^2.4.0",
+        "pestphp/pest-plugin-laravel": "^2.0",
+        "pestphp/pest": "^2.5",
+        "orchestra/testbench": "^8.5"
+    },
+    "config": {
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        },
+        "sort-packages": true
     }
-  ],
-  "require": {
-    "laravel/dusk": "^7.5"
-  },
-  "autoload": {
-    "psr-4": {
-      "Igniter\\Dusk\\": "src/"
-    }
-  },
-  "extra": {
-    "tastyigniter-extension": {
-      "code": "igniter.dusk",
-      "name": "Dusk",
-      "icon": {
-        "class": "fa fa-vials",
-        "backgroundColor": "#405263",
-        "color": "#FFF"
-      }
-    }
-  }
 }
