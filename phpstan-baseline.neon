@@ -1,0 +1,36 @@
+parameters:
+	ignoreErrors:
+		-
+			message: "#^Call to an undefined method Igniter\\\\Dusk\\\\Classes\\\\DuskTestCase\\:\\:attribute\\(\\)\\.$#"
+			count: 1
+			path: src/Classes/DuskTestCase.php
+
+		-
+			message: "#^Call to an undefined method Illuminate\\\\Foundation\\\\Application\\:\\:extensionsPath\\(\\)\\.$#"
+			count: 1
+			path: src/Classes/DuskTestCase.php
+
+		-
+			message: "#^Call to an undefined static method Igniter\\\\Admin\\\\Models\\\\User\\:\\:whereUsername\\(\\)\\.$#"
+			count: 1
+			path: src/Classes/DuskTestCase.php
+
+		-
+			message: "#^Call to an undefined static method Igniter\\\\System\\\\Classes\\\\ExtensionManager\\:\\:forgetInstance\\(\\)\\.$#"
+			count: 1
+			path: src/Classes/DuskTestCase.php
+
+		-
+			message: "#^Call to an undefined static method Igniter\\\\System\\\\Classes\\\\UpdateManager\\:\\:forgetInstance\\(\\)\\.$#"
+			count: 1
+			path: src/Classes/DuskTestCase.php
+
+		-
+			message: "#^Call to an undefined static method Illuminate\\\\Support\\\\Facades\\\\Mail\\:\\:pretend\\(\\)\\.$#"
+			count: 1
+			path: src/Classes/DuskTestCase.php
+
+		-
+			message: "#^Call to static method call\\(\\) on an unknown class Artisan\\.$#"
+			count: 1
+			path: src/Classes/DuskTestCase.php
