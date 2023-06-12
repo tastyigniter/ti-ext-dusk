@@ -11,17 +11,17 @@ parameters:
 			path: src/Classes/DuskTestCase.php
 
 		-
-			message: "#^Call to an undefined static method Igniter\\\\Admin\\\\Models\\\\User\\:\\:whereUsername\\(\\)\\.$#"
-			count: 1
-			path: src/Classes/DuskTestCase.php
-
-		-
 			message: "#^Call to an undefined static method Igniter\\\\System\\\\Classes\\\\ExtensionManager\\:\\:forgetInstance\\(\\)\\.$#"
 			count: 1
 			path: src/Classes/DuskTestCase.php
 
 		-
 			message: "#^Call to an undefined static method Igniter\\\\System\\\\Classes\\\\UpdateManager\\:\\:forgetInstance\\(\\)\\.$#"
+			count: 1
+			path: src/Classes/DuskTestCase.php
+
+		-
+			message: "#^Call to an undefined static method Igniter\\\\User\\\\Models\\\\User\\:\\:whereUsername\\(\\)\\.$#"
 			count: 1
 			path: src/Classes/DuskTestCase.php
 
