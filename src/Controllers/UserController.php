@@ -53,7 +53,7 @@ class UserController
     }
 
     /**
-     * @return \Igniter\Flame\Auth\Manager
+     * @return \Igniter\User\Auth\Manager
      */
     protected function getAuthManager($appContext)
     {

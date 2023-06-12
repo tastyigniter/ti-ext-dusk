@@ -5,10 +5,10 @@ namespace Igniter\Dusk\Classes;
 use Facebook\WebDriver\Chrome\ChromeOptions;
 use Facebook\WebDriver\Remote\DesiredCapabilities;
 use Facebook\WebDriver\Remote\RemoteWebDriver;
-use Igniter\Admin\Models\User;
 use Igniter\Dusk\Concerns\CreatesApplication;
 use Igniter\Dusk\Concerns\RunsMigrations;
 use Igniter\Dusk\Concerns\TestsExtensions;
+use Igniter\User\Models\User;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Mail;
 use Laravel\Dusk\Browser;
@@ -100,7 +100,7 @@ abstract class DuskTestCase extends BaseTestCase
     /**
      * Return the default user to authenticate.
      *
-     * @return \Igniter\Admin\Models\User|int|null
+     * @return \Igniter\User\Models\User|int|null
      */
     protected function user()
     {
