@@ -2,7 +2,6 @@
 
 namespace Igniter\Dusk\Commands;
 
-use Igniter\Flame\Exception\ApplicationException;
 use Igniter\System\Classes\ExtensionManager;
 use Illuminate\Support\Facades\Config;
 use Symfony\Component\Finder\Finder;
@@ -73,7 +72,7 @@ class DuskCommand extends \Laravel\Dusk\Console\DuskCommand
 
         if ($extensionCode = $this->argument('extension')) {
             if (!$extensionManager->hasExtension($extensionCode)) {
-                throw new ApplicationException('Extension "'.$extensionCode.'" is not installed.');
+                throw new \RuntimeException('Extension "'.$extensionCode.'" is not installed.');
             }
 
             $this->extensions[$extensionCode] = str_after($extensionManager->path($extensionCode), base_path());

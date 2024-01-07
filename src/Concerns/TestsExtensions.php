@@ -2,7 +2,6 @@
 
 namespace Igniter\Dusk\Concerns;
 
-use Igniter\Flame\Exception\SystemException;
 use Igniter\System\Classes\ExtensionManager;
 use Igniter\System\Classes\UpdateManager;
 
@@ -81,7 +80,7 @@ trait TestsExtensions
                 return;
             }
 
-            throw new SystemException(sprintf('Invalid extension code: "%s"', $code));
+            throw new \InvalidArgumentException(sprintf('Invalid extension code: "%s"', $code));
         }
 
         $extensionManager = resolve(ExtensionManager::class);
@@ -95,7 +94,7 @@ trait TestsExtensions
                     return;
                 }
 
-                throw new SystemException(sprintf('Unable to find extension with code: "%s"', $code));
+                throw new \RuntimeException(sprintf('Unable to find extension with code: "%s"', $code));
             }
 
             $extension = $extensionManager->loadExtension($namespace, $path);
