@@ -81,7 +81,7 @@ abstract class DuskTestCase extends BaseTestCase
 
         Browser::$storeSourceAt = $sourceDir;
 
-        Browser::$userResolver = function () {
+        Browser::$userResolver = function() {
             return $this->user();
         };
 
@@ -114,7 +114,7 @@ abstract class DuskTestCase extends BaseTestCase
      */
     protected function registerBrowserMacros()
     {
-        Browser::macro('hasClass', function (string $selector, string $class) {
+        Browser::macro('hasClass', function(string $selector, string $class) {
             $classes = preg_split('/\s+/', $this->attribute($selector, 'class'), -1, PREG_SPLIT_NO_EMPTY);
 
             if (empty($classes)) {

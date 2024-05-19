@@ -11,7 +11,7 @@ class SettingsTest extends DuskTestCase
 {
     public function testGeneralSettingForm()
     {
-        $this->browse(function (Browser $browser) {
+        $this->browse(function(Browser $browser) {
             $browser->login()
                 ->visit(new GeneralSettings)
                 ->click('@siteTab')
@@ -25,7 +25,7 @@ class SettingsTest extends DuskTestCase
 
     public function testSetupSettingForm()
     {
-        $this->browse(function (Browser $browser) {
+        $this->browse(function(Browser $browser) {
             $browser->login()
                 ->visit(new SetupSettings)
                 ->click('@saveButton')

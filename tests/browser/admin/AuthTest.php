@@ -13,7 +13,7 @@ class AuthTest extends DuskTestCase
 {
     public function testLoginAndLogout()
     {
-        $this->browse(function (Browser $browser) {
+        $this->browse(function(Browser $browser) {
             $username = $username ?? env('DUSK_ADMIN_USER', 'admin');
             $password = $password ?? env('DUSK_ADMIN_PASS', 'admin');
 
@@ -24,7 +24,7 @@ class AuthTest extends DuskTestCase
 
             $browser->on(new Dashboard)
                 ->click('@accountMenuLink')
-                ->within(new SideNav, function (Browser $browser) {
+                ->within(new SideNav, function(Browser $browser) {
                     $browser->assertPresent('@navItem');
                 })
                 ->clickLink('Logout');
@@ -35,7 +35,7 @@ class AuthTest extends DuskTestCase
 
     public function testResetPassword()
     {
-        $this->browse(function (Browser $browser) {
+        $this->browse(function(Browser $browser) {
             $browser->visit(new Login)
                 ->click('@resetPasswordLink');
 

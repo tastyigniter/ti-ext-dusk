@@ -43,7 +43,7 @@ class DuskCommand extends \Laravel\Dusk\Console\DuskCommand
 
         $options = $this->stripPhpArguments($_SERVER['argv']);
 
-        return $this->withDuskEnvironment(function () use ($options) {
+        return $this->withDuskEnvironment(function() use ($options) {
             $process = (new Process(array_merge(
                 $this->binary(), $this->phpunitArguments($options)
             )))->setTimeout(null);
@@ -55,7 +55,7 @@ class DuskCommand extends \Laravel\Dusk\Console\DuskCommand
             }
 
             try {
-                return $process->run(function ($type, $line) {
+                return $process->run(function($type, $line) {
                     $this->output->write($line);
                 });
             } catch (ProcessSignaledException $e) {
