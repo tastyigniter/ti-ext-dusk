@@ -1,9 +1,11 @@
 ## Introduction
+
 The TastyIgniter Dusk extension brings [Laravel Dusk's](https://laravel.com/docs/dusk) browser testing capabilities to your TastyIgniter application. It equips core and extension developers with the tools to write and run automated browser tests, ensuring your application's functionality is robust and reliable.
 
 > **Note:** This extension is intended for development purposes only. It should never be installed in a production environment, as it could allow arbitrary users to authenticate with your application.
 
 ## Features
+
 - **Automated Browser Testing:** Write and run tests that simulate user interactions with your application.
 - **Easy Setup:** Get started with browser testing quickly with minimal configuration.
 
@@ -33,7 +35,7 @@ You can write your browser tests in the `tests/Browser` directory of your extens
 
 ### Running tests
 
-To run your browser tests, use the `dusk` command to run all the tests in the `tests/Browser` directory. 
+To run your browser tests, use the `dusk` command to run all the tests in the `tests/Browser` directory.
 
 ```bash
 php artisan dusk
