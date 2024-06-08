@@ -1,58 +1,58 @@
 {
-    "name": "tastyigniter/ti-ext-dusk",
-    "type": "tastyigniter-package",
-    "description": "Laravel Dusk browser testing for TastyIgniter.",
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "Sam Poyigi",
-            "email": "sam@sampoyigi.com"
-        }
-    ],
-    "require": {
-        "laravel/dusk": "^7.5",
-        "tastyigniter/core": "dev-master"
+  "name": "tastyigniter/ti-ext-dusk",
+  "type": "tastyigniter-package",
+  "description": "Laravel Dusk browser testing for TastyIgniter.",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Sam Poyigi",
+      "email": "sam@sampoyigi.com"
+    }
+  ],
+  "require": {
+    "laravel/dusk": "^8.2",
+    "tastyigniter/core": "dev-master"
+  },
+  "require-dev": {
+    "laravel/pint": "^1.2",
+    "nunomaduro/larastan": "^2.4.0",
+    "orchestra/testbench": "^8.5",
+    "pestphp/pest-plugin-laravel": "^2.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "Igniter\\Dusk\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Igniter\\Dusk\\Tests\\": "tests/"
+    }
+  },
+  "extra": {
+    "tastyigniter-extension": {
+      "code": "igniter.dusk",
+      "name": "Dusk",
+      "icon": {
+        "class": "fa fa-vials",
+        "backgroundColor": "#405263",
+        "color": "#FFF"
+      }
+    }
+  },
+  "scripts": {
+    "test": "vendor/bin/pest",
+    "test-coverage": "vendor/bin/pest --coverage",
+    "format": "vendor/bin/pint",
+    "static": "vendor/bin/phpstan analyse --ansi --memory-limit 1056M"
+  },
+  "config": {
+    "allow-plugins": {
+      "pestphp/pest-plugin": true,
+      "php-http/discovery": true,
+      "composer/installers": true
     },
-    "require-dev": {
-        "laravel/pint": "^1.2",
-        "nunomaduro/larastan": "^2.4.0",
-        "orchestra/testbench": "^8.5",
-        "pestphp/pest-plugin-laravel": "^2.0"
-    },
-    "autoload": {
-        "psr-4": {
-            "Igniter\\Dusk\\": "src/"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "Igniter\\Dusk\\Tests\\": "tests/"
-        }
-    },
-    "extra": {
-        "tastyigniter-extension": {
-            "code": "igniter.dusk",
-            "name": "Dusk",
-            "icon": {
-                "class": "fa fa-vials",
-                "backgroundColor": "#405263",
-                "color": "#FFF"
-            }
-        }
-    },
-    "scripts": {
-        "test": "vendor/bin/pest",
-        "test-coverage": "vendor/bin/pest --coverage",
-        "format": "vendor/bin/pint",
-        "static": "vendor/bin/phpstan analyse --ansi --memory-limit 1056M"
-    },
-    "config": {
-        "allow-plugins": {
-            "pestphp/pest-plugin": true,
-            "php-http/discovery": true,
-            "composer/installers": true
-        },
-        "sort-packages": true
-    },
-    "minimum-stability": "dev"
+    "sort-packages": true
+  },
+  "minimum-stability": "dev"
 }
