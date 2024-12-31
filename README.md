@@ -1,3 +1,10 @@
+<p align="center">
+    <a href="https://github.com/tastyigniter/ti-ext-dusk/actions"><img src="https://github.com/tastyigniter/ti-ext-dusk/actions/workflows/pipeline.yml/badge.svg" alt="Build Status"></a>
+    <a href="https://packagist.org/packages/tastyigniter/ti-ext-dusk"><img src="https://img.shields.io/packagist/dt/tastyigniter/ti-ext-dusk" alt="Total Downloads"></a>
+    <a href="https://packagist.org/packages/tastyigniter/ti-ext-dusk"><img src="https://img.shields.io/packagist/v/tastyigniter/ti-ext-dusk" alt="Latest Stable Version"></a>
+    <a href="https://packagist.org/packages/tastyigniter/ti-ext-dusk"><img src="https://img.shields.io/packagist/l/tastyigniter/ti-ext-dusk" alt="License"></a>
+</p>
+
 ## Introduction
 
 The TastyIgniter Dusk extension brings [Laravel Dusk's](https://laravel.com/docs/dusk) browser testing capabilities to your TastyIgniter application. It equips core and extension developers with the tools to write and run automated browser tests, ensuring your application's functionality is robust and reliable.
