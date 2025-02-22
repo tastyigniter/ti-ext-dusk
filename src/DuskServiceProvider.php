@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace Igniter\Dusk;
 
+use Igniter\Dusk\Commands\ComponentCommand;
 use Igniter\Dusk\Commands\DuskCommand;
 use Igniter\Dusk\Commands\DuskFailsCommand;
 use Igniter\Dusk\Commands\MakeCommand;
 use Igniter\Dusk\Commands\PageCommand;
-use Igniter\Dusk\Commands\ComponentCommand;
-use Laravel\Dusk\Console\ChromeDriverCommand;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
+use Laravel\Dusk\Console\ChromeDriverCommand;
 
 class DuskServiceProvider extends ServiceProvider
 {

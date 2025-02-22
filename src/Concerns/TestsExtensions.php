@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace Igniter\Dusk\Concerns;
 
-use ReflectionClass;
-use InvalidArgumentException;
-use RuntimeException;
 use Artisan;
 use Igniter\System\Classes\ExtensionManager;
 use Igniter\System\Classes\UpdateManager;
+use InvalidArgumentException;
+use ReflectionClass;
+use RuntimeException;
 
 trait TestsExtensions
 {

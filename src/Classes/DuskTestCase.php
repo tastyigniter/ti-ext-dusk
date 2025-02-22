@@ -21,6 +21,7 @@ abstract class DuskTestCase extends BaseTestCase
     use CreatesApplication;
     use RunsMigrations;
     use TestsExtensions;
+
     /**
      * Prepare for Dusk test execution.
      *
