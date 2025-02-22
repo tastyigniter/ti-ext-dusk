@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Igniter\Dusk;
 
 use Igniter\System\Classes\BaseExtension;
@@ -11,10 +13,8 @@ class Extension extends BaseExtension
 {
     /**
      * Register method, called when the extension is first registered.
-     *
-     * @return void
      */
-    public function register()
+    public function register(): void
     {
         $this->app->register(DuskServiceProvider::class);
     }

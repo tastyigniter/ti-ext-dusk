@@ -31,11 +31,6 @@ parameters:
 			path: src/Classes/DuskTestCase.php
 
 		-
-			message: "#^Method Igniter\\\\System\\\\Classes\\\\ExtensionManager\\:\\:loadExtension\\(\\) invoked with 2 parameters, 1 required\\.$#"
-			count: 1
-			path: src/Classes/DuskTestCase.php
-
-		-
 			message: "#^Call to method getUser\\(\\) on an unknown class Igniter\\\\User\\\\Auth\\\\Manager\\.$#"
 			count: 1
 			path: src/Controllers/UserController.php

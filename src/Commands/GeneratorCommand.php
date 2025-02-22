@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Igniter\Dusk\Commands;
 
 use Illuminate\Support\Str;
@@ -14,7 +16,7 @@ abstract class GeneratorCommand extends \Illuminate\Console\GeneratorCommand
         if (count($array = explode('.', $code)) != 2) {
             $this->error('Invalid extension name, Example name: AuthorName.ExtensionName');
 
-            return;
+            return null;
         }
 
         $this->extensionNamespace = $array;

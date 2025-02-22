@@ -1,14 +1,19 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Igniter\Dusk\Tests;
+
+use Igniter\Flame\ServiceProvider;
+use Igniter\Dusk\Extension;
 
 abstract class TestCase extends \Orchestra\Testbench\TestCase
 {
     protected function getPackageProviders($app)
     {
         return [
-            \Igniter\Flame\ServiceProvider::class,
-            \Igniter\Dusk\Extension::class,
+            ServiceProvider::class,
+            Extension::class,
         ];
     }
 }

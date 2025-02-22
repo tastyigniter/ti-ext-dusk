@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Igniter\Dusk\Commands;
 
 use Igniter\System\Classes\ExtensionManager;
@@ -50,17 +52,17 @@ class DuskCommand extends \Laravel\Dusk\Console\DuskCommand
 
             try {
                 $process->setTty(!$this->option('without-tty'));
-            } catch (RuntimeException $e) {
-                $this->output->writeln('Warning: '.$e->getMessage());
+            } catch (RuntimeException $runtimeException) {
+                $this->output->writeln('Warning: '.$runtimeException->getMessage());
             }
 
             try {
-                return $process->run(function($type, $line) {
+                return $process->run(function($type, $line): void {
                     $this->output->write($line);
                 });
-            } catch (ProcessSignaledException $e) {
-                if (extension_loaded('pcntl') && $e->getSignal() !== SIGINT) {
-                    throw $e;
+            } catch (ProcessSignaledException $processSignaledException) {
+                if (extension_loaded('pcntl') && $processSignaledException->getSignal() !== SIGINT) {
+                    throw $processSignaledException;
                 }
             }
         });
@@ -244,7 +246,7 @@ class DuskCommand extends \Laravel\Dusk\Console\DuskCommand
         return 'extensions/igniter/dusk/stubs/.env.dusk';
     }
 
-    protected function duskPhpUnitXmlFile()
+    protected function duskPhpUnitXmlFile(): string
     {
         return extension_path('igniter/dusk/stubs/.phpunit.dusk.xml.stub');
     }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Igniter\Dusk\Controllers;
 
 use Igniter\Flame\Exception\ApplicationException;
@@ -8,11 +10,8 @@ class UserController
 {
     /**
      * Retrieve the authenticated user identifier and class name.
-     *
-     * @param string|null $appContext
-     * @return array
      */
-    public function user($appContext = null)
+    public function user(?string $appContext = null): array
     {
         $user = $this->getAuthManager($appContext)->getUser();
         if (!$user) {
@@ -29,10 +28,9 @@ class UserController
      * Login using the given user ID.
      *
      * @param string $userId
-     * @param string|null $appContext
-     * @return void
+     * @throws ApplicationException
      */
-    public function login($userId, $appContext = 'admin')
+    public function login($userId, string $appContext = 'admin'): void
     {
         $loggedIn = $this->getAuthManager($appContext)->loginUsingId($userId);
 
@@ -43,11 +41,8 @@ class UserController
 
     /**
      * Log the user out of the application.
-     *
-     * @param string $appContext
-     * @return void
      */
-    public function logout($appContext = 'admin')
+    public function logout(string $appContext = 'admin'): void
     {
         $this->getAuthManager($appContext)->logout();
     }
@@ -55,8 +50,8 @@ class UserController
     /**
      * @return \Igniter\User\Auth\Manager
      */
-    protected function getAuthManager($appContext)
+    protected function getAuthManager(string $appContext)
     {
-        return app($appContext == 'admin' ? $appContext.'.auth' : 'auth');
+        return app($appContext === 'admin' ? $appContext.'.auth' : 'auth');
     }
 }

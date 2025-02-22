@@ -1,6 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Igniter\Dusk\Concerns;
+
+use Illuminate\Contracts\Console\Kernel;
+use Illuminate\Foundation\Application;
 
 trait CreatesApplication
 {
@@ -21,13 +26,13 @@ trait CreatesApplication
     /**
      * Creates the application.
      *
-     * @return \Illuminate\Foundation\Application
+     * @return Application
      */
     public function createApplication()
     {
         $app = require __DIR__.'/../../../../bootstrap/app.php';
 
-        $app->make(\Illuminate\Contracts\Console\Kernel::class)->bootstrap();
+        $app->make(Kernel::class)->bootstrap();
 
         $app['cache']->setDefaultDriver('array');
         $app->setLocale('en');

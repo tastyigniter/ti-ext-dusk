@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Igniter\Dusk\Tests\Components\Admin;
 
 use Laravel\Dusk\Browser;
@@ -19,10 +21,8 @@ class SideNav extends BaseComponent
 
     /**
      * Assert that the browser page contains the component.
-     *
-     * @return void
      */
-    public function assert(Browser $browser)
+    public function assert(Browser $browser): void
     {
         $browser->assertVisible($this->selector());
     }

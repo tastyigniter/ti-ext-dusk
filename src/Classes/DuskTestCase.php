@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Igniter\Dusk\Classes;
 
 use Facebook\WebDriver\Chrome\ChromeOptions;
@@ -16,15 +18,15 @@ use Laravel\Dusk\TestCase as BaseTestCase;
 
 abstract class DuskTestCase extends BaseTestCase
 {
-    use CreatesApplication, RunsMigrations, TestsExtensions;
-
+    use CreatesApplication;
+    use RunsMigrations;
+    use TestsExtensions;
     /**
      * Prepare for Dusk test execution.
      *
      * @beforeClass
-     * @return void
      */
-    public static function prepare()
+    public static function prepare(): void
     {
         static::startChromeDriver();
     }
@@ -32,7 +34,7 @@ abstract class DuskTestCase extends BaseTestCase
     /**
      * Create the RemoteWebDriver instance.
      *
-     * @return \Facebook\WebDriver\Remote\RemoteWebDriver
+     * @return RemoteWebDriver
      */
     protected function driver()
     {
@@ -53,7 +55,7 @@ abstract class DuskTestCase extends BaseTestCase
     /**
      * Register the base URL with Dusk.
      */
-    public function setUp(): void
+    protected function setUp(): void
     {
         $this->resetManagers();
 
@@ -88,9 +90,9 @@ abstract class DuskTestCase extends BaseTestCase
         $this->registerBrowserMacros();
     }
 
-    public function tearDown(): void
+    protected function tearDown(): void
     {
-        if ($this->usingTestDatabase && isset($this->testDatabasePath)) {
+        if ($this->usingTestDatabase && $this->testDatabasePath !== null) {
             unlink($this->testDatabasePath);
         }
 
@@ -100,7 +102,7 @@ abstract class DuskTestCase extends BaseTestCase
     /**
      * Return the default user to authenticate.
      *
-     * @return \Igniter\User\Models\User|int|null
+     * @return User|int|null
      */
     protected function user()
     {
@@ -114,10 +116,10 @@ abstract class DuskTestCase extends BaseTestCase
      */
     protected function registerBrowserMacros()
     {
-        Browser::macro('hasClass', function(string $selector, string $class) {
+        Browser::macro('hasClass', function(string $selector, string $class): bool {
             $classes = preg_split('/\s+/', $this->attribute($selector, 'class'), -1, PREG_SPLIT_NO_EMPTY);
 
-            if (empty($classes)) {
+            if ($classes === [] || $classes === false) {
                 return false;
             }
 

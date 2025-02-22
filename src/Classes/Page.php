@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Igniter\Dusk\Classes;
 
 abstract class Page extends \Laravel\Dusk\Page

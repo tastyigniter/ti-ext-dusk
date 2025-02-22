@@ -1,7 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Igniter\Dusk\Concerns;
 
+use ReflectionClass;
+use InvalidArgumentException;
+use RuntimeException;
+use Artisan;
 use Igniter\System\Classes\ExtensionManager;
 use Igniter\System\Classes\UpdateManager;
 
@@ -49,12 +55,10 @@ trait TestsExtensions
 
     /**
      * Locates the extension code based on the test file location.
-     *
-     * @return string|bool
      */
-    protected function guessExtensionCodeFromTest()
+    protected function guessExtensionCodeFromTest(): string|false
     {
-        $reflect = new \ReflectionClass($this);
+        $reflect = new ReflectionClass($this);
         $path = $reflect->getFilename();
         $basePath = $this->app->extensionsPath();
 
@@ -80,7 +84,7 @@ trait TestsExtensions
                 return;
             }
 
-            throw new \InvalidArgumentException(sprintf('Invalid extension code: "%s"', $code));
+            throw new InvalidArgumentException(sprintf('Invalid extension code: "%s"', $code));
         }
 
         $extensionManager = resolve(ExtensionManager::class);
@@ -94,10 +98,10 @@ trait TestsExtensions
                     return;
                 }
 
-                throw new \RuntimeException(sprintf('Unable to find extension with code: "%s"', $code));
+                throw new RuntimeException(sprintf('Unable to find extension with code: "%s"', $code));
             }
 
-            $extension = $extensionManager->loadExtension($namespace, $path);
+            $extension = $extensionManager->loadExtension($namespace);
         }
 
         $this->testCaseLoadedExtensions[$code] = $extension;
@@ -105,6 +109,6 @@ trait TestsExtensions
         $this->detectExtensionDependencies($extension);
 
         // Execute the command
-        \Artisan::call('extension:refresh', ['name' => $code]);
+        Artisan::call('extension:refresh', ['name' => $code]);
     }
 }
