@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Igniter\Dusk\Classes;
 
-use Override;
 use Facebook\WebDriver\Chrome\ChromeOptions;
 use Facebook\WebDriver\Remote\DesiredCapabilities;
 use Facebook\WebDriver\Remote\RemoteWebDriver;
@@ -16,6 +15,7 @@ use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Mail;
 use Laravel\Dusk\Browser;
 use Laravel\Dusk\TestCase as BaseTestCase;
+use Override;
 
 abstract class DuskTestCase extends BaseTestCase
 {

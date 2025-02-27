@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Igniter\Dusk;
 
-use Override;
 use Igniter\Dusk\Commands\ComponentCommand;
 use Igniter\Dusk\Commands\DuskCommand;
 use Igniter\Dusk\Commands\DuskFailsCommand;
@@ -13,6 +12,7 @@ use Igniter\Dusk\Commands\PageCommand;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Dusk\Console\ChromeDriverCommand;
+use Override;
 
 class DuskServiceProvider extends ServiceProvider
 {

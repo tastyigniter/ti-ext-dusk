@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Igniter\Dusk;
 
-use Override;
 use Igniter\System\Classes\BaseExtension;
+use Override;
 
 /**
  * Dusk Extension Information File

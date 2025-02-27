@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Igniter\Dusk\Tests;
 
-use Override;
 use Igniter\Dusk\Extension;
 use Igniter\Flame\ServiceProvider;
+use Override;
 
 abstract class TestCase extends \Orchestra\Testbench\TestCase
 {

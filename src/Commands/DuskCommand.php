@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Igniter\Dusk\Commands;
 
-use Override;
 use Igniter\System\Classes\ExtensionManager;
 use Illuminate\Support\Facades\Config;
+use Override;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Process\Exception\ProcessSignaledException;
 use Symfony\Component\Process\Exception\RuntimeException;

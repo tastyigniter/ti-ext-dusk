@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Igniter\Dusk\Classes;
 
-use Override;
 use Laravel\Dusk\Page;
+use Override;
 
 abstract class AdminPage extends Page
 {

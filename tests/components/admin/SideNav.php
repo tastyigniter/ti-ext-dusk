@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Igniter\Dusk\Tests\Components\Admin;
 
-use Override;
 use Laravel\Dusk\Browser;
 use Laravel\Dusk\Component as BaseComponent;
+use Override;
 
 class SideNav extends BaseComponent
 {

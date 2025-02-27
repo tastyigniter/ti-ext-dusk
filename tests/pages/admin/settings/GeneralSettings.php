@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Igniter\Dusk\Tests\Pages\Admin\Settings;
 
-use Override;
 use Igniter\Dusk\Classes\AdminPage;
 use Laravel\Dusk\Browser;
+use Override;
 
 class GeneralSettings extends AdminPage
 {

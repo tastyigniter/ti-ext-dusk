@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Igniter\Dusk\Commands;
 
-use Override;
 use Illuminate\Support\Str;
+use Override;
 
 abstract class GeneratorCommand extends \Illuminate\Console\GeneratorCommand
 {
