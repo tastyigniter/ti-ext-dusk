@@ -16,17 +16,7 @@ parameters:
 			path: src/Classes/DuskTestCase.php
 
 		-
-			message: "#^Call to an undefined static method Igniter\\\\User\\\\Models\\\\User\\:\\:whereUsername\\(\\)\\.$#"
-			count: 1
-			path: src/Classes/DuskTestCase.php
-
-		-
 			message: "#^Call to an undefined static method Illuminate\\\\Support\\\\Facades\\\\Mail\\:\\:pretend\\(\\)\\.$#"
-			count: 1
-			path: src/Classes/DuskTestCase.php
-
-		-
-			message: "#^Call to static method call\\(\\) on an unknown class Artisan\\.$#"
 			count: 1
 			path: src/Classes/DuskTestCase.php
 

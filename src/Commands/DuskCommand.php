@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Igniter\Dusk\Commands;
 
+use Override;
 use Igniter\System\Classes\ExtensionManager;
 use Illuminate\Support\Facades\Config;
 use Symfony\Component\Finder\Finder;
@@ -35,6 +36,7 @@ class DuskCommand extends \Laravel\Dusk\Console\DuskCommand
      */
     protected $extensions = [];
 
+    #[Override]
     public function handle()
     {
         $this->listExtensions();
@@ -90,6 +92,7 @@ class DuskCommand extends \Laravel\Dusk\Console\DuskCommand
      *
      * @return void
      */
+    #[Override]
     protected function purgeScreenshots()
     {
         $path = Config::get('igniter.dusk::dusk.screenshotsPath', base_path('tests/browser/screenshots'));
@@ -111,6 +114,7 @@ class DuskCommand extends \Laravel\Dusk\Console\DuskCommand
      *
      * @return void
      */
+    #[Override]
     protected function purgeConsoleLogs()
     {
         $path = Config::get('igniter.dusk::dusk.consolePath', base_path('tests/browser/console'));
@@ -142,6 +146,7 @@ class DuskCommand extends \Laravel\Dusk\Console\DuskCommand
         return $arguments;
     }
 
+    #[Override]
     protected function setupDuskEnvironment()
     {
         if (file_exists(base_path($this->duskFile()))) {
@@ -163,6 +168,7 @@ class DuskCommand extends \Laravel\Dusk\Console\DuskCommand
         $this->setupSignalHandler();
     }
 
+    #[Override]
     protected function teardownDuskEnviroment()
     {
         $this->removeConfiguration();
@@ -190,6 +196,7 @@ class DuskCommand extends \Laravel\Dusk\Console\DuskCommand
         $this->hasConfigurationFiles = true;
     }
 
+    #[Override]
     protected function writeConfiguration()
     {
         if (!file_exists($file = base_path('phpunit.dusk.xml')) &&
@@ -233,6 +240,7 @@ class DuskCommand extends \Laravel\Dusk\Console\DuskCommand
         rmdir(base_path('config/dusk'));
     }
 
+    #[Override]
     protected function duskFile()
     {
         if (file_exists(base_path($file = '.env.dusk.'.$this->laravel->environment()))) {

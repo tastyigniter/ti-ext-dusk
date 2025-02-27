@@ -4,12 +4,14 @@ declare(strict_types=1);
 
 namespace Igniter\Dusk\Commands;
 
+use Override;
 use Illuminate\Support\Str;
 
 abstract class GeneratorCommand extends \Illuminate\Console\GeneratorCommand
 {
     protected $extensionNamespace;
 
+    #[Override]
     public function handle()
     {
         $code = $this->argument('extension');
@@ -30,6 +32,7 @@ abstract class GeneratorCommand extends \Illuminate\Console\GeneratorCommand
      * @param string $name
      * @return string
      */
+    #[Override]
     protected function getPath($name)
     {
         $name = Str::replaceFirst($this->rootNamespace().'\\', '', $name);
@@ -38,7 +41,7 @@ abstract class GeneratorCommand extends \Illuminate\Console\GeneratorCommand
 
         [$vendor, $author] = $this->extensionNamespace;
 
-        return extension_path(strtolower($vendor).'/'.strtolower($author).'/tests/'.$name.'.php');
+        return extension_path(strtolower((string) $vendor).'/'.strtolower((string) $author).'/tests/'.$name.'.php');
     }
 
     /**
@@ -46,6 +49,7 @@ abstract class GeneratorCommand extends \Illuminate\Console\GeneratorCommand
      *
      * @return string
      */
+    #[Override]
     protected function rootNamespace()
     {
         if ($this->extensionNamespace) {

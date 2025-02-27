@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Igniter\Dusk\Commands;
 
+use Override;
+
 class PageCommand extends GeneratorCommand
 {
     /**
@@ -32,6 +34,7 @@ class PageCommand extends GeneratorCommand
      *
      * @return string
      */
+    #[Override]
     protected function getStub()
     {
         return __DIR__.'/stubs/page.stub';
@@ -43,6 +46,7 @@ class PageCommand extends GeneratorCommand
      * @param string $rootNamespace
      * @return string
      */
+    #[Override]
     protected function getDefaultNamespace($rootNamespace)
     {
         return $rootNamespace.'\Pages';

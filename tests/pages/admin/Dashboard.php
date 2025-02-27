@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Igniter\Dusk\Tests\Pages\Admin;
 
+use Override;
 use Igniter\Dusk\Classes\AdminPage;
 use Laravel\Dusk\Browser;
 
@@ -14,6 +15,7 @@ class Dashboard extends AdminPage
      *
      * @return string
      */
+    #[Override]
     public function url()
     {
         return '/admin/dashboard';
@@ -22,6 +24,7 @@ class Dashboard extends AdminPage
     /**
      * Assert that the browser is on the page.
      */
+    #[Override]
     public function assert(Browser $browser): void
     {
         $browser->assertPathIs($this->url())

@@ -64,8 +64,8 @@ trait TestsExtensions
 
         $result = false;
 
-        if (strpos($path, $basePath) === 0) {
-            $result = ltrim(str_replace('\\', '/', substr($path, strlen($basePath))), '/');
+        if (str_starts_with($path, (string) $basePath)) {
+            $result = ltrim(str_replace('\\', '/', substr($path, strlen((string) $basePath))), '/');
             $result = implode('.', array_slice(explode('/', $result), 0, 2));
         }
 
@@ -79,7 +79,7 @@ trait TestsExtensions
      */
     protected function runExtensionRefreshCommand($code, $throwException = true): void
     {
-        if (!preg_match('/^[\w+]*\.[\w+]*$/', $code)) {
+        if (!preg_match('/^[\w+]*\.[\w+]*$/', (string) $code)) {
             if (!$throwException) {
                 return;
             }
@@ -90,7 +90,7 @@ trait TestsExtensions
         $extensionManager = resolve(ExtensionManager::class);
 
         if (!$extension = $extensionManager->findExtension($code)) {
-            $namespace = '\\'.str_replace('.', '\\', strtolower($code));
+            $namespace = '\\'.str_replace('.', '\\', strtolower((string) $code));
             $path = array_get($extensionManager->namespaces(), $namespace);
 
             if (!$path) {

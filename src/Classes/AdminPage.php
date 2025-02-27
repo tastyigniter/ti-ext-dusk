@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Igniter\Dusk\Classes;
 
+use Override;
 use Laravel\Dusk\Page;
 
 abstract class AdminPage extends Page
@@ -13,6 +14,7 @@ abstract class AdminPage extends Page
      *
      * @return array
      */
+    #[Override]
     public static function siteElements()
     {
         return [

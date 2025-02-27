@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Igniter\Dusk\Classes;
 
+use Override;
+
 abstract class Page extends \Laravel\Dusk\Page
 {
     /**
@@ -11,6 +13,7 @@ abstract class Page extends \Laravel\Dusk\Page
      *
      * @return array
      */
+    #[Override]
     public static function siteElements()
     {
         return [];

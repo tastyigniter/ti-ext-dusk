@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Igniter\Dusk;
 
+use Override;
 use Igniter\Dusk\Commands\ComponentCommand;
 use Igniter\Dusk\Commands\DuskCommand;
 use Igniter\Dusk\Commands\DuskFailsCommand;
@@ -37,6 +38,7 @@ class DuskServiceProvider extends ServiceProvider
         }
     }
 
+    #[Override]
     public function register(): void
     {
         if ($this->app->runningInConsole()) {

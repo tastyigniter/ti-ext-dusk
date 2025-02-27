@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Igniter\Dusk\Classes;
 
+use Override;
 use Facebook\WebDriver\Chrome\ChromeOptions;
 use Facebook\WebDriver\Remote\DesiredCapabilities;
 use Facebook\WebDriver\Remote\RemoteWebDriver;
@@ -37,6 +38,7 @@ abstract class DuskTestCase extends BaseTestCase
      *
      * @return RemoteWebDriver
      */
+    #[Override]
     protected function driver()
     {
         $options = (new ChromeOptions)->addArguments([
@@ -56,6 +58,7 @@ abstract class DuskTestCase extends BaseTestCase
     /**
      * Register the base URL with Dusk.
      */
+    #[Override]
     protected function setUp(): void
     {
         $this->resetManagers();
@@ -84,13 +87,12 @@ abstract class DuskTestCase extends BaseTestCase
 
         Browser::$storeSourceAt = $sourceDir;
 
-        Browser::$userResolver = function() {
-            return $this->user();
-        };
+        Browser::$userResolver = fn() => $this->user();
 
         $this->registerBrowserMacros();
     }
 
+    #[Override]
     protected function tearDown(): void
     {
         if ($this->usingTestDatabase && $this->testDatabasePath !== null) {
@@ -105,6 +107,7 @@ abstract class DuskTestCase extends BaseTestCase
      *
      * @return User|int|null
      */
+    #[Override]
     protected function user()
     {
         return User::whereUsername(env('DUSK_ADMIN_USER', 'admin'))->first();

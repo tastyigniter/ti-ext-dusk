@@ -16,8 +16,8 @@ class AuthTest extends DuskTestCase
     public function test_login_and_logout(): void
     {
         $this->browse(function(Browser $browser): void {
-            $username = $username ?? env('DUSK_ADMIN_USER', 'admin');
-            $password = $password ?? env('DUSK_ADMIN_PASS', 'admin');
+            $username ??= env('DUSK_ADMIN_USER', 'admin');
+            $password ??= env('DUSK_ADMIN_PASS', 'admin');
 
             $browser->visit(new Login)
                 ->fillInLoginForm($username, $password)
