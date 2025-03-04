@@ -1,9 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Igniter\Dusk\Tests\Pages\Admin\Settings;
 
 use Igniter\Dusk\Classes\AdminPage;
 use Laravel\Dusk\Browser;
+use Override;
 
 class SetupSettings extends AdminPage
 {
@@ -12,6 +15,7 @@ class SetupSettings extends AdminPage
      *
      * @return string
      */
+    #[Override]
     public function url()
     {
         return '/admin/settings/edit/setup';
@@ -19,11 +23,9 @@ class SetupSettings extends AdminPage
 
     /**
      * Assert that the browser is on the page.
-     *
-     * @param Browser $browser
-     * @return void
      */
-    public function assert(Browser $browser)
+    #[Override]
+    public function assert(Browser $browser): void
     {
         $browser->assertPathIs($this->url())
             ->assertTitleContains('Settings: Setup -')
@@ -31,6 +33,7 @@ class SetupSettings extends AdminPage
             ->assertPresent('@accountMenuLink');
     }
 
+    #[Override]
     public function elements()
     {
         return [

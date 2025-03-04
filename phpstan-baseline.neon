@@ -1,0 +1,41 @@
+parameters:
+	ignoreErrors:
+		-
+			message: "#^Call to an undefined method Illuminate\\\\Foundation\\\\Application\\:\\:extensionsPath\\(\\)\\.$#"
+			count: 1
+			path: src/Classes/DuskTestCase.php
+
+		-
+			message: "#^Call to an undefined static method Igniter\\\\System\\\\Classes\\\\ExtensionManager\\:\\:forgetInstance\\(\\)\\.$#"
+			count: 1
+			path: src/Classes/DuskTestCase.php
+
+		-
+			message: "#^Call to an undefined static method Igniter\\\\System\\\\Classes\\\\UpdateManager\\:\\:forgetInstance\\(\\)\\.$#"
+			count: 1
+			path: src/Classes/DuskTestCase.php
+
+		-
+			message: "#^Call to an undefined static method Illuminate\\\\Support\\\\Facades\\\\Mail\\:\\:pretend\\(\\)\\.$#"
+			count: 1
+			path: src/Classes/DuskTestCase.php
+
+		-
+			message: "#^Call to method getUser\\(\\) on an unknown class Igniter\\\\User\\\\Auth\\\\Manager\\.$#"
+			count: 1
+			path: src/Controllers/UserController.php
+
+		-
+			message: "#^Call to method loginUsingId\\(\\) on an unknown class Igniter\\\\User\\\\Auth\\\\Manager\\.$#"
+			count: 1
+			path: src/Controllers/UserController.php
+
+		-
+			message: "#^Call to method logout\\(\\) on an unknown class Igniter\\\\User\\\\Auth\\\\Manager\\.$#"
+			count: 1
+			path: src/Controllers/UserController.php
+
+		-
+			message: "#^Method Igniter\\\\Dusk\\\\Controllers\\\\UserController\\:\\:getAuthManager\\(\\) has invalid return type Igniter\\\\User\\\\Auth\\\\Manager\\.$#"
+			count: 1
+			path: src/Controllers/UserController.php

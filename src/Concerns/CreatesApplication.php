@@ -1,15 +1,18 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Igniter\Dusk\Concerns;
 
-use Illuminate\Support\Facades\Config;
+use Illuminate\Contracts\Console\Kernel;
+use Illuminate\Foundation\Application;
 
 trait CreatesApplication
 {
     /**
      * Determines if a test SQLite database is being used
      *
-     * @var boolean
+     * @var bool
      */
     protected $usingTestDatabase = false;
 
@@ -23,20 +26,18 @@ trait CreatesApplication
     /**
      * Creates the application.
      *
-     * @return \Illuminate\Foundation\Application
+     * @return Application
      */
     public function createApplication()
     {
         $app = require __DIR__.'/../../../../bootstrap/app.php';
 
-        $app->make(\Illuminate\Contracts\Console\Kernel::class)->bootstrap();
+        $app->make(Kernel::class)->bootstrap();
 
         $app['cache']->setDefaultDriver('array');
         $app->setLocale('en');
 
         $app['config']->set('mail.driver', 'array');
-
-        $app->useExtensionsPath(realpath(base_path().Config::get('system.extensionsPath')));
 
         return $app;
     }

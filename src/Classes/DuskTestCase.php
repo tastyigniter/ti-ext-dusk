@@ -1,30 +1,34 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Igniter\Dusk\Classes;
 
 use Facebook\WebDriver\Chrome\ChromeOptions;
 use Facebook\WebDriver\Remote\DesiredCapabilities;
 use Facebook\WebDriver\Remote\RemoteWebDriver;
-use Igniter\Admin\Models\User;
 use Igniter\Dusk\Concerns\CreatesApplication;
 use Igniter\Dusk\Concerns\RunsMigrations;
 use Igniter\Dusk\Concerns\TestsExtensions;
+use Igniter\User\Models\User;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Mail;
 use Laravel\Dusk\Browser;
 use Laravel\Dusk\TestCase as BaseTestCase;
+use Override;
 
 abstract class DuskTestCase extends BaseTestCase
 {
-    use CreatesApplication, RunsMigrations, TestsExtensions;
+    use CreatesApplication;
+    use RunsMigrations;
+    use TestsExtensions;
 
     /**
      * Prepare for Dusk test execution.
      *
      * @beforeClass
-     * @return void
      */
-    public static function prepare()
+    public static function prepare(): void
     {
         static::startChromeDriver();
     }
@@ -32,8 +36,9 @@ abstract class DuskTestCase extends BaseTestCase
     /**
      * Create the RemoteWebDriver instance.
      *
-     * @return \Facebook\WebDriver\Remote\RemoteWebDriver
+     * @return RemoteWebDriver
      */
+    #[Override]
     protected function driver()
     {
         $options = (new ChromeOptions)->addArguments([
@@ -52,17 +57,17 @@ abstract class DuskTestCase extends BaseTestCase
 
     /**
      * Register the base URL with Dusk.
-     *
-     * @return void
      */
-    public function setUp(): void
+    #[Override]
+    protected function setUp(): void
     {
         $this->resetManagers();
 
         parent::setUp();
 
-        if ($this->usingTestDatabase)
+        if ($this->usingTestDatabase) {
             $this->runIgniterUpCommand();
+        }
 
         $this->detectExtension();
 
@@ -82,16 +87,15 @@ abstract class DuskTestCase extends BaseTestCase
 
         Browser::$storeSourceAt = $sourceDir;
 
-        Browser::$userResolver = function () {
-            return $this->user();
-        };
+        Browser::$userResolver = fn() => $this->user();
 
         $this->registerBrowserMacros();
     }
 
-    public function tearDown(): void
+    #[Override]
+    protected function tearDown(): void
     {
-        if ($this->usingTestDatabase && isset($this->testDatabasePath)) {
+        if ($this->usingTestDatabase && $this->testDatabasePath !== null) {
             unlink($this->testDatabasePath);
         }
 
@@ -101,8 +105,9 @@ abstract class DuskTestCase extends BaseTestCase
     /**
      * Return the default user to authenticate.
      *
-     * @return \Igniter\Admin\Models\User|int|null
+     * @return User|int|null
      */
+    #[Override]
     protected function user()
     {
         return User::whereUsername(env('DUSK_ADMIN_USER', 'admin'))->first();
@@ -115,10 +120,10 @@ abstract class DuskTestCase extends BaseTestCase
      */
     protected function registerBrowserMacros()
     {
-        Browser::macro('hasClass', function (string $selector, string $class) {
+        Browser::macro('hasClass', function(string $selector, string $class): bool {
             $classes = preg_split('/\s+/', $this->attribute($selector, 'class'), -1, PREG_SPLIT_NO_EMPTY);
 
-            if (empty($classes)) {
+            if ($classes === [] || $classes === false) {
                 return false;
             }
 
@@ -131,10 +136,12 @@ abstract class DuskTestCase extends BaseTestCase
         $screenshotDir = Config::get('igniter.dusk::dusk.screenshotsPath', storage_path('dusk/screenshots'));
         $consoleDir = Config::get('igniter.dusk::dusk.consolePath', storage_path('dusk/console'));
 
-        if (!is_dir($screenshotDir))
+        if (!is_dir($screenshotDir)) {
             mkdir($screenshotDir, 0777, true);
+        }
 
-        if (!is_dir($consoleDir))
+        if (!is_dir($consoleDir)) {
             mkdir($consoleDir, 0777, true);
+        }
     }
 }

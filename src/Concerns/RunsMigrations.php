@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Igniter\Dusk\Concerns;
 
 use Illuminate\Support\Facades\Artisan;

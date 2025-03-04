@@ -1,9 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Igniter\Dusk\Tests\Pages\Admin\Settings;
 
 use Igniter\Dusk\Classes\AdminPage;
 use Laravel\Dusk\Browser;
+use Override;
 
 class GeneralSettings extends AdminPage
 {
@@ -12,6 +15,7 @@ class GeneralSettings extends AdminPage
      *
      * @return string
      */
+    #[Override]
     public function url()
     {
         return '/admin/settings/edit/general';
@@ -19,11 +23,9 @@ class GeneralSettings extends AdminPage
 
     /**
      * Assert that the browser is on the page.
-     *
-     * @param Browser $browser
-     * @return void
      */
-    public function assert(Browser $browser)
+    #[Override]
+    public function assert(Browser $browser): void
     {
         $browser->assertPathIs($this->url())
             ->assertTitleContains('Settings: General -')
@@ -35,6 +37,7 @@ class GeneralSettings extends AdminPage
             ->assertSeeIn('@siteTab', 'Site');
     }
 
+    #[Override]
     public function elements()
     {
         return [

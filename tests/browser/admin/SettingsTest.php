@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Igniter\Dusk\Tests\Browser\Admin;
 
 use Igniter\Dusk\Classes\DuskTestCase;
@@ -9,9 +11,9 @@ use Laravel\Dusk\Browser;
 
 class SettingsTest extends DuskTestCase
 {
-    public function testGeneralSettingForm()
+    public function test_general_setting_form(): void
     {
-        $this->browse(function (Browser $browser) {
+        $this->browse(function(Browser $browser): void {
             $browser->login()
                 ->visit(new GeneralSettings)
                 ->click('@siteTab')
@@ -23,9 +25,9 @@ class SettingsTest extends DuskTestCase
         });
     }
 
-    public function testSetupSettingForm()
+    public function test_setup_setting_form(): void
     {
-        $this->browse(function (Browser $browser) {
+        $this->browse(function(Browser $browser): void {
             $browser->login()
                 ->visit(new SetupSettings)
                 ->click('@saveButton')

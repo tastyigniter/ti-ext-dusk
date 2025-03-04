@@ -1,10 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Igniter\Dusk\Concerns;
 
-use Igniter\Flame\Exception\SystemException;
+use Artisan;
 use Igniter\System\Classes\ExtensionManager;
 use Igniter\System\Classes\UpdateManager;
+use InvalidArgumentException;
+use ReflectionClass;
+use RuntimeException;
 
 trait TestsExtensions
 {
@@ -23,28 +28,26 @@ trait TestsExtensions
     /**
      * Detects the current extension based on the namespace,
      * when running tests within a extension.
-     *
-     * @return void
      */
     public function detectExtension(): void
     {
         $this->testCaseLoadedExtensions = [];
 
-        if ($extensionCode = $this->guessExtensionCodeFromTest())
+        if ($extensionCode = $this->guessExtensionCodeFromTest()) {
             $this->runExtensionRefreshCommand($extensionCode, false);
+        }
     }
 
     /**
      * Detects the current extension dependencies based on the namespace,
      * when running tests within a extension.
-     *
-     * @param $extension
      */
     protected function detectExtensionDependencies($extension): void
     {
         foreach ((array)$extension->require as $dependency) {
-            if (isset($this->testCaseLoadedExtensions[$dependency]))
+            if (isset($this->testCaseLoadedExtensions[$dependency])) {
                 continue;
+            }
 
             $this->runExtensionRefreshCommand($dependency);
         }
@@ -52,19 +55,17 @@ trait TestsExtensions
 
     /**
      * Locates the extension code based on the test file location.
-     *
-     * @return string|bool
      */
-    protected function guessExtensionCodeFromTest()
+    protected function guessExtensionCodeFromTest(): string|false
     {
-        $reflect = new \ReflectionClass($this);
+        $reflect = new ReflectionClass($this);
         $path = $reflect->getFilename();
         $basePath = $this->app->extensionsPath();
 
         $result = false;
 
-        if (strpos($path, $basePath) === 0) {
-            $result = ltrim(str_replace('\\', '/', substr($path, strlen($basePath))), '/');
+        if (str_starts_with($path, (string) $basePath)) {
+            $result = ltrim(str_replace('\\', '/', substr($path, strlen((string) $basePath))), '/');
             $result = implode('.', array_slice(explode('/', $result), 0, 2));
         }
 
@@ -74,33 +75,33 @@ trait TestsExtensions
     /**
      * Runs a refresh command on a extension.
      *
-     * @param $code
      * @param bool $throwException
-     * @return void
      */
     protected function runExtensionRefreshCommand($code, $throwException = true): void
     {
-        if (!preg_match('/^[\w+]*\.[\w+]*$/', $code)) {
-            if (!$throwException)
+        if (!preg_match('/^[\w+]*\.[\w+]*$/', (string) $code)) {
+            if (!$throwException) {
                 return;
+            }
 
-            throw new SystemException(sprintf('Invalid extension code: "%s"', $code));
+            throw new InvalidArgumentException(sprintf('Invalid extension code: "%s"', $code));
         }
 
-        $extensionManager = ExtensionManager::instance();
+        $extensionManager = resolve(ExtensionManager::class);
 
         if (!$extension = $extensionManager->findExtension($code)) {
-            $namespace = '\\'.str_replace('.', '\\', strtolower($code));
+            $namespace = '\\'.str_replace('.', '\\', strtolower((string) $code));
             $path = array_get($extensionManager->namespaces(), $namespace);
 
             if (!$path) {
-                if (!$throwException)
+                if (!$throwException) {
                     return;
+                }
 
-                throw new SystemException(sprintf('Unable to find extension with code: "%s"', $code));
+                throw new RuntimeException(sprintf('Unable to find extension with code: "%s"', $code));
             }
 
-            $extension = $extensionManager->loadExtension($namespace, $path);
+            $extension = $extensionManager->loadExtension($namespace);
         }
 
         $this->testCaseLoadedExtensions[$code] = $extension;
@@ -108,6 +109,6 @@ trait TestsExtensions
         $this->detectExtensionDependencies($extension);
 
         // Execute the command
-        \Artisan::call('extension:refresh', ['name' => $code]);
+        Artisan::call('extension:refresh', ['name' => $code]);
     }
 }

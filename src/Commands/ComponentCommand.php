@@ -1,6 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Igniter\Dusk\Commands;
+
+use Override;
 
 class ComponentCommand extends GeneratorCommand
 {
@@ -30,6 +34,7 @@ class ComponentCommand extends GeneratorCommand
      *
      * @return string
      */
+    #[Override]
     protected function getStub()
     {
         return __DIR__.'/stubs/component.stub';
@@ -41,6 +46,7 @@ class ComponentCommand extends GeneratorCommand
      * @param string $rootNamespace
      * @return string
      */
+    #[Override]
     protected function getDefaultNamespace($rootNamespace)
     {
         return $rootNamespace.'\Components';

@@ -1,9 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Igniter\Dusk\Tests\Components\Admin;
 
 use Laravel\Dusk\Browser;
 use Laravel\Dusk\Component as BaseComponent;
+use Override;
 
 class SideNav extends BaseComponent
 {
@@ -12,6 +15,7 @@ class SideNav extends BaseComponent
      *
      * @return string
      */
+    #[Override]
     public function selector()
     {
         return '@sideNav';
@@ -19,11 +23,9 @@ class SideNav extends BaseComponent
 
     /**
      * Assert that the browser page contains the component.
-     *
-     * @param Browser $browser
-     * @return void
      */
-    public function assert(Browser $browser)
+    #[Override]
+    public function assert(Browser $browser): void
     {
         $browser->assertVisible($this->selector());
     }
@@ -33,6 +35,7 @@ class SideNav extends BaseComponent
      *
      * @return array
      */
+    #[Override]
     public function elements()
     {
         return [

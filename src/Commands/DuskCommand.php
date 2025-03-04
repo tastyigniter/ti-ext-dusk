@@ -1,10 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Igniter\Dusk\Commands;
 
-use Igniter\Flame\Exception\ApplicationException;
 use Igniter\System\Classes\ExtensionManager;
 use Illuminate\Support\Facades\Config;
+use Override;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Process\Exception\ProcessSignaledException;
 use Symfony\Component\Process\Exception\RuntimeException;
@@ -34,6 +36,7 @@ class DuskCommand extends \Laravel\Dusk\Console\DuskCommand
      */
     protected $extensions = [];
 
+    #[Override]
     public function handle()
     {
         $this->listExtensions();
@@ -44,26 +47,24 @@ class DuskCommand extends \Laravel\Dusk\Console\DuskCommand
 
         $options = $this->stripPhpArguments($_SERVER['argv']);
 
-        return $this->withDuskEnvironment(function () use ($options) {
+        return $this->withDuskEnvironment(function() use ($options) {
             $process = (new Process(array_merge(
                 $this->binary(), $this->phpunitArguments($options)
             )))->setTimeout(null);
 
             try {
                 $process->setTty(!$this->option('without-tty'));
-            }
-            catch (RuntimeException $e) {
-                $this->output->writeln('Warning: '.$e->getMessage());
+            } catch (RuntimeException $runtimeException) {
+                $this->output->writeln('Warning: '.$runtimeException->getMessage());
             }
 
             try {
-                return $process->run(function ($type, $line) {
+                return $process->run(function($type, $line): void {
                     $this->output->write($line);
                 });
-            }
-            catch (ProcessSignaledException $e) {
-                if (extension_loaded('pcntl') && $e->getSignal() !== SIGINT) {
-                    throw $e;
+            } catch (ProcessSignaledException $processSignaledException) {
+                if (extension_loaded('pcntl') && $processSignaledException->getSignal() !== SIGINT) {
+                    throw $processSignaledException;
                 }
             }
         });
@@ -71,15 +72,15 @@ class DuskCommand extends \Laravel\Dusk\Console\DuskCommand
 
     protected function listExtensions()
     {
-        $extensionManager = ExtensionManager::instance();
+        $extensionManager = resolve(ExtensionManager::class);
 
         if ($extensionCode = $this->argument('extension')) {
-            if (!$extensionManager->hasExtension($extensionCode))
-                throw new ApplicationException('Extension "'.$extensionCode.'" is not installed.');
+            if (!$extensionManager->hasExtension($extensionCode)) {
+                throw new \RuntimeException('Extension "'.$extensionCode.'" is not installed.');
+            }
 
             $this->extensions[$extensionCode] = str_after($extensionManager->path($extensionCode), base_path());
-        }
-        else {
+        } else {
             foreach ($extensionManager->getExtensions() as $extensionCode => $extension) {
                 $this->extensions[$extensionCode] = str_after($extensionManager->path($extensionCode), base_path());
             }
@@ -91,11 +92,13 @@ class DuskCommand extends \Laravel\Dusk\Console\DuskCommand
      *
      * @return void
      */
+    #[Override]
     protected function purgeScreenshots()
     {
         $path = Config::get('igniter.dusk::dusk.screenshotsPath', base_path('tests/browser/screenshots'));
-        if (!is_dir($path))
+        if (!is_dir($path)) {
             return;
+        }
 
         $files = Finder::create()->files()
             ->in($path)
@@ -111,11 +114,13 @@ class DuskCommand extends \Laravel\Dusk\Console\DuskCommand
      *
      * @return void
      */
+    #[Override]
     protected function purgeConsoleLogs()
     {
         $path = Config::get('igniter.dusk::dusk.consolePath', base_path('tests/browser/console'));
-        if (!is_dir($path))
+        if (!is_dir($path)) {
             return;
+        }
 
         $files = Finder::create()->files()
             ->in($path)
@@ -130,23 +135,28 @@ class DuskCommand extends \Laravel\Dusk\Console\DuskCommand
     {
         $arguments = array_slice($arguments, 2);
 
-        if ($this->argument('extension'))
+        if ($this->argument('extension')) {
             array_shift($arguments);
+        }
 
-        if ($this->option('without-tty'))
+        if ($this->option('without-tty')) {
             array_shift($arguments);
+        }
 
         return $arguments;
     }
 
+    #[Override]
     protected function setupDuskEnvironment()
     {
         if (file_exists(base_path($this->duskFile()))) {
-            if (!file_exists(base_path('.env')))
+            if (!file_exists(base_path('.env'))) {
                 copy(base_path($this->duskFile()), base_path('.env'));
+            }
 
-            if (file_get_contents(base_path('.env')) !== file_get_contents(base_path($this->duskFile())))
+            if (file_get_contents(base_path('.env')) !== file_get_contents(base_path($this->duskFile()))) {
                 $this->backupEnvironment();
+            }
 
             $this->writeConfigurationFiles();
 
@@ -158,6 +168,7 @@ class DuskCommand extends \Laravel\Dusk\Console\DuskCommand
         $this->setupSignalHandler();
     }
 
+    #[Override]
     protected function teardownDuskEnviroment()
     {
         $this->removeConfiguration();
@@ -185,6 +196,7 @@ class DuskCommand extends \Laravel\Dusk\Console\DuskCommand
         $this->hasConfigurationFiles = true;
     }
 
+    #[Override]
     protected function writeConfiguration()
     {
         if (!file_exists($file = base_path('phpunit.dusk.xml')) &&
@@ -217,27 +229,32 @@ class DuskCommand extends \Laravel\Dusk\Console\DuskCommand
 
     protected function removeConfigurationFiles()
     {
-        if (!$this->hasConfigurationFiles OR !is_dir(base_path('config/dusk')))
+        if (!$this->hasConfigurationFiles || !is_dir(base_path('config/dusk'))) {
             return;
+        }
 
-        foreach (glob(base_path('config/dusk/*.php')) as $file)
+        foreach (glob(base_path('config/dusk/*.php')) as $file) {
             unlink($file);
+        }
 
         rmdir(base_path('config/dusk'));
     }
 
+    #[Override]
     protected function duskFile()
     {
-        if (file_exists(base_path($file = '.env.dusk.'.$this->laravel->environment())))
+        if (file_exists(base_path($file = '.env.dusk.'.$this->laravel->environment()))) {
             return $file;
+        }
 
-        if (file_exists(base_path('.env.dusk')))
+        if (file_exists(base_path('.env.dusk'))) {
             return '.env.dusk';
+        }
 
         return 'extensions/igniter/dusk/stubs/.env.dusk';
     }
 
-    protected function duskPhpUnitXmlFile()
+    protected function duskPhpUnitXmlFile(): string
     {
         return extension_path('igniter/dusk/stubs/.phpunit.dusk.xml.stub');
     }

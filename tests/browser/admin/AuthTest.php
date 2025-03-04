@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Igniter\Dusk\Tests\Browser\Admin;
 
 use Igniter\Dusk\Classes\DuskTestCase;
@@ -11,11 +13,11 @@ use Laravel\Dusk\Browser;
 
 class AuthTest extends DuskTestCase
 {
-    public function testLoginAndLogout()
+    public function test_login_and_logout(): void
     {
-        $this->browse(function (Browser $browser) {
-            $username = $username ?? env('DUSK_ADMIN_USER', 'admin');
-            $password = $password ?? env('DUSK_ADMIN_PASS', 'admin');
+        $this->browse(function(Browser $browser): void {
+            $username ??= env('DUSK_ADMIN_USER', 'admin');
+            $password ??= env('DUSK_ADMIN_PASS', 'admin');
 
             $browser->visit(new Login)
                 ->fillInLoginForm($username, $password)
@@ -24,7 +26,7 @@ class AuthTest extends DuskTestCase
 
             $browser->on(new Dashboard)
                 ->click('@accountMenuLink')
-                ->within(new SideNav, function (Browser $browser) {
+                ->within(new SideNav, function(Browser $browser): void {
                     $browser->assertPresent('@navItem');
                 })
                 ->clickLink('Logout');
@@ -33,9 +35,9 @@ class AuthTest extends DuskTestCase
         });
     }
 
-    public function testResetPassword()
+    public function test_reset_password(): void
     {
-        $this->browse(function (Browser $browser) {
+        $this->browse(function(Browser $browser): void {
             $browser->visit(new Login)
                 ->click('@resetPasswordLink');
 

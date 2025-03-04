@@ -1,16 +1,24 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Igniter\Dusk;
 
+use Igniter\Dusk\Commands\ComponentCommand;
+use Igniter\Dusk\Commands\DuskCommand;
+use Igniter\Dusk\Commands\DuskFailsCommand;
+use Igniter\Dusk\Commands\MakeCommand;
+use Igniter\Dusk\Commands\PageCommand;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
-use Laravel\Dusk;
+use Laravel\Dusk\Console\ChromeDriverCommand;
+use Override;
 
 class DuskServiceProvider extends ServiceProvider
 {
     protected $defer = false;
 
-    public function boot()
+    public function boot(): void
     {
         if (!$this->app->environment('production')) {
             Route::get('/_dusk/login/{userId}/{appContext?}', [
@@ -30,16 +38,17 @@ class DuskServiceProvider extends ServiceProvider
         }
     }
 
-    public function register()
+    #[Override]
+    public function register(): void
     {
         if ($this->app->runningInConsole()) {
             $this->commands([
-                Commands\DuskCommand::class,
-                Commands\DuskFailsCommand::class,
-                Commands\MakeCommand::class,
-                Commands\PageCommand::class,
-                Commands\ComponentCommand::class,
-                Dusk\Console\ChromeDriverCommand::class,
+                DuskCommand::class,
+                DuskFailsCommand::class,
+                MakeCommand::class,
+                PageCommand::class,
+                ComponentCommand::class,
+                ChromeDriverCommand::class,
             ]);
         }
     }
