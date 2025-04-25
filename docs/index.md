@@ -1,9 +1,15 @@
+---
+title: "Dusk"
+section: "extensions"
+sortOrder: 40
+---
+
 ## Installation
 
 You can install the extension via composer using the following command:
 
 ```bash
-composer require tastyigniter/ti-ext-dusk:"^4.0" -W
+composer require tastyigniter/ti-ext-dusk -W
 ```
 
 After installing the extension, run the following command to create a `tests/Browser` directory, an example Dusk test, and install the Chrome Driver binary for your operating system:
