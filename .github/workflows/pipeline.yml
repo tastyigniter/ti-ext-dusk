@@ -1,6 +1,6 @@
 name: Dusk CI Pipeline
 
-on: [ push, pull_request, workflow_dispatch ]
+on: [ push, workflow_dispatch ]
 
 jobs:
   php-tests:
